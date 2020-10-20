@@ -23,3 +23,7 @@ Se pide cumplir con los requerimientos mencionados para que cada persona pueda e
 2. persona.sueldoPara(ganancia)
 3. persona.cobrarSueldo(ganancia)
 4. persona.gastar(cantidad)
+
+### Diagrama de clases Base
+
+<img src="diagramaBase.png">
