@@ -1,0 +1,81 @@
+import template.*
+describe "Tests template"{
+
+	const uneEmpleade = new Empleade()
+	const uneCooperativista = new Cooperativista(sociesCooperativa = 10)
+	const uneEmprendedor = new Emprendedor()
+	const uneEmpresarie = new Empresarie()
+	
+	test "El básico de cooperativista se calcula correctamente" {
+		assert.equals(10, uneCooperativista.basico(100))
+	}
+	
+	test "El básico de empleade se calcula correctamente" {
+		assert.equals(1, uneEmpleade.basico(100))
+	}
+	
+	test "El básico de emprendedor se calcula correctamente" {
+		assert.equals(5000, uneEmprendedor.basico(100))
+	}
+
+	test "El básico de empresarie se calcula correctamente" {
+		assert.equals(80, uneEmpresarie.basico(100))
+	}
+	
+	test "Cooperativista no cobra presentismo" {
+		assert.notThat(uneCooperativista.cobraPresentismo())
+	}
+	
+	test "Emprendedor no cobra presentismo" {
+		assert.notThat(uneEmprendedor.cobraPresentismo())
+	}
+
+	test "Empleade no cobra presentismo si faltó alguna vez" {
+		uneEmpleade.faltarUnDia()
+		assert.notThat(uneEmpleade.cobraPresentismo())
+	}
+
+	test "Empleade cobra presentismo si no faltó nunca" {
+		assert.that(uneEmpleade.cobraPresentismo())
+	}
+
+	test "Empresarie cobra presentismo" {
+		assert.that(uneEmpresarie.cobraPresentismo())
+	}
+	
+	test "El valor del presentismo se calcula correctamente" {
+		assert.equals(100, uneEmpresarie.presentismo(1200))
+	}
+	
+	test "El valor de impuestos se calcula correctamente" {
+		assert.equals(5, uneEmpresarie.impuestos(100))
+	}
+	
+	test "Trabajador gasta dinero que tiene y queda con monto correcto" {
+		const ingresos = uneEmprendedor.ingresos(1000)
+		uneEmprendedor.cobrar(1000)
+		uneEmprendedor.gastar(500)
+		assert.equals(ingresos - 500, uneEmprendedor.cuenta())
+	}
+	
+	test "Trabajador intenta gastar mas de lo que tiene, lanza error y no hace el gasto" {
+		const ingresos = uneEmprendedor.ingresos(1000)
+		uneEmprendedor.cobrar(1000)
+		assert.throwsExceptionLike(new DomainException(message = "No puedo quedarme sin plata"),
+			{uneEmprendedor.gastar(6000)}
+		)
+		assert.equals(ingresos, uneEmprendedor.cuenta())
+	}
+	
+	test "Empleade gasta y pide adelanto" {
+		uneEmpleade.cobrar(10000)
+		uneEmpleade.gastar(100)
+		assert.equals(500, uneEmpleade.adelantos())
+	}
+	
+	test "Empleade gasta y no pide adelanto" {
+		uneEmpleade.cobrar(100000)
+		uneEmpleade.gastar(100)
+		assert.equals(0, uneEmpleade.adelantos())
+	}
+}
