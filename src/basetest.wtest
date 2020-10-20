@@ -1,0 +1,26 @@
+import base.*
+describe "Tests trabajadorxs "{
+
+	const uneEmpleade = new Empleade()
+	const uneCooperativista = new Cooperativista(sociesCooperativa = 10)
+	const uneEmprendedor = new Emprendedor()
+	const uneEmpresarie = new Empresarie()
+	
+	test "El básico de cooperativista se calcula correctamente" {
+		assert.equals(10, uneCooperativista.basico(100))
+	}
+	
+	test "El básico de empleade se calcula correctamente" {
+		assert.equals(1, uneEmpleade.basico(100))
+	}
+	
+	test "El básico de emprendedor se calcula correctamente" {
+		assert.equals(5000, uneEmprendedor.basico(100))
+	}
+
+	test "El básico de empresarie se calcula correctamente" {
+		assert.equals(80, uneEmpresarie.basico(100))
+	}
+	
+
+}
