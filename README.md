@@ -27,3 +27,7 @@ Se pide cumplir con los requerimientos mencionados para que cada persona pueda e
 ### Diagrama de clases Base
 
 <img src="diagramaBase.png">
+
+### Diagrama de clases Final
+
+<img src="diagramaFinal.png">
