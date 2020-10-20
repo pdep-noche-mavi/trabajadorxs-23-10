@@ -52,15 +52,15 @@ describe "Tests template"{
 	}
 	
 	test "Trabajador gasta dinero que tiene y queda con monto correcto" {
-		const ingresos = uneEmprendedor.ingresos(1000)
-		uneEmprendedor.cobrar(1000)
+		const ingresos = uneEmprendedor.sueldoPara(1000)
+		uneEmprendedor.cobrarSueldo(1000)
 		uneEmprendedor.gastar(500)
 		assert.equals(ingresos - 500, uneEmprendedor.cuenta())
 	}
 	
 	test "Trabajador intenta gastar mas de lo que tiene, lanza error y no hace el gasto" {
-		const ingresos = uneEmprendedor.ingresos(1000)
-		uneEmprendedor.cobrar(1000)
+		const ingresos = uneEmprendedor.sueldoPara(1000)
+		uneEmprendedor.cobrarSueldo(1000)
 		assert.throwsExceptionLike(new DomainException(message = "No puedo quedarme sin plata"),
 			{uneEmprendedor.gastar(6000)}
 		)
@@ -68,13 +68,13 @@ describe "Tests template"{
 	}
 	
 	test "Empleade gasta y pide adelanto" {
-		uneEmpleade.cobrar(10000)
+		uneEmpleade.cobrarSueldo(10000)
 		uneEmpleade.gastar(100)
 		assert.equals(500, uneEmpleade.adelantos())
 	}
 	
 	test "Empleade gasta y no pide adelanto" {
-		uneEmpleade.cobrar(100000)
+		uneEmpleade.cobrarSueldo(100000)
 		uneEmpleade.gastar(100)
 		assert.equals(0, uneEmpleade.adelantos())
 	}

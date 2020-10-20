@@ -6,11 +6,11 @@ class Trabajador {
 	
 	method adelantos() = 0
 	method cuenta() = cuenta
-	method cobrar(ganancia){
-		cuenta = cuenta + self.ingresos(ganancia)
+	method cobrarSueldo(ganancia){
+		cuenta = cuenta + self.sueldoPara(ganancia)
 	}
 	
-	method ingresos(ganancia) {
+	method sueldoPara(ganancia) {
 		const basico = self.basico(ganancia)
 		return basico + self.presentismo(basico) - self.impuestos(basico) - self.adelantos()
 	}
